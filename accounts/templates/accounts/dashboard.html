@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h1>Dashboard</h1>
+        <p>You can also <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.</p>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <h3>Open</h3>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Number</th>
+                    <th>Date of ring</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for ring in ring_list %}
+                  <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ ring.date_of_ring }}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
