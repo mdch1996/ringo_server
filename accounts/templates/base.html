@@ -4,7 +4,7 @@
 
     <head>
         <title>{% block title %}{% endblock %}</title>
-        <link href="{% static "css/base.css" %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "css/base.css" %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     </head>
 
@@ -15,7 +15,7 @@
                 <ul class="menu">
                     <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
                     <li {% if section == "images" %}class="selected"{% endif %}><a href="#">Images</a></li>
-                    <li {% if section == "people" %}class="selected"{% endif %}><a href="#">People</a></li>
+                    <li {% if section == "sensor" %}class="selected"{% endif %}><a href="#">Sensor</a></li>
                 </ul>
             {% endif %}
             <span class="user">

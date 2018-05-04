@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Device, Ring, Open
+from .models import Device, Ring, Switch
 
 
 @admin.register(Device)
@@ -12,6 +12,6 @@ class RingAdmin(admin.ModelAdmin):
     list_display = ('date_of_ring',)
 
 
-@admin.register(Open)
-class OpenAdmin(admin.ModelAdmin):
-    list_display = ('date_of_open',)
+@admin.register(Switch)
+class SwitchAdmin(admin.ModelAdmin):
+    list_display = ('created',)

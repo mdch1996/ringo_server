@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Device
+from .models import Device, Switch
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -30,3 +30,10 @@ class DeviceEditForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = ('raspberry_pi_code',)
+
+
+class SwitchForm(forms.ModelForm):
+
+    class Meta:
+        model = Switch
+        fields = ('key',)

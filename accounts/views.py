@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .forms import UserRegistrationForm, DeviceEditForm, UserEditForm
-from .models import Device, Ring, Open
+from .utills import post_data
+
+from .forms import UserRegistrationForm, DeviceEditForm, UserEditForm, SwitchForm
+from .models import Device, Ring, Switch
 
 
 # def user_login(request):
@@ -45,7 +47,7 @@ def register(request):
             # print("------user_form.save------", new_user)
             new_user.set_password(user_form.cleaned_data['password'])
             new_user.save()
-            device = Device.objects.create(user=new_user)
+            Device.objects.create(user=new_user)
             return render(request,
                           'accounts/register_done.html',
                           {'new_user': new_user})
@@ -78,4 +80,39 @@ def edit(request):
 @login_required()
 def dashboard(request):
     ring_list = Ring.objects.filter(device__user__exact=request.user)
-    return render(request, "accounts/dashboard.html", {"ring_list": ring_list})
+    switch_list = Switch.objects.filter(device__user__exact=request.user)
+    device = Device.objects.get(user__exact=request.user)
+
+    if request.method == 'POST':
+
+        switch_form = SwitchForm(data=request.POST)
+        if switch_form.is_valid():
+
+            key = switch_form.cleaned_data['key']
+            data = {
+                "device": device.raspberry_pi_code,
+                "key": key
+            }
+            print("-------data-------", data)
+            post_status = post_data(device.ip, data)
+
+            print("=======switch_status=======", post_status)
+            print('-------switch_form------', switch_form)
+
+            new_item = switch_form.save(commit=False)
+            if post_status == 200:
+                new_item.done = True
+
+            new_item.device = device
+            new_item.save()
+            return render(request, "accounts/dashboard.html", {"ring_list": ring_list,
+                                                               "switch_list": switch_list,
+                                                               "switch_form": switch_form})
+        else:
+            messages.error(request, "your device ip isn't correct!")
+    else:
+        switch_form = SwitchForm()
+
+    return render(request, "accounts/dashboard.html", {"ring_list": ring_list,
+                                                       "switch_list": switch_list,
+                                                       "switch_form": switch_form})

@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.core.exceptions import ObjectDoesNotExist
 
-from accounts.models import Device, Ring, Open
+from accounts.models import Device
 from .serializers import RingSerializer, DeviceSerializer
 
 

@@ -18,8 +18,15 @@ class Ring(models.Model):
     date_of_ring = models.DateTimeField()
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ('-created',)
 
-class Open(models.Model):
-    device = models.ForeignKey(Device, related_name='device_open')
-    date_of_open = models.DateTimeField()
+
+class Switch(models.Model):
+    device = models.ForeignKey(Device, related_name='device_switch')
+    key = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
+    done = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-created',)
