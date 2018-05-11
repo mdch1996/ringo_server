@@ -4,18 +4,20 @@
 
 {% block content %}
     <div class="row">
-        <h1>Dashboard</h1>
-        <p>You can also <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.</p>
-
+        <div class="col-lg-12">
+            <h1>Dashboard</h1>
+            <p>You can also <a href="{% url "edit" %}">edit your profile</a> or <a href="{% url "password_change" %}">change your password</a>.</p>
+        </div>
     </div>
 
     <div class="row">
          <div class="col-lg-6">
             <h1>Control Device</h1>
+
             <form action="." method="post">
                 {% csrf_token %}
                 <label for="id_key" class="switch">Key:
-                    <input type="checkbox" name={{ switch_form.key.name }} id="id_key" checked>
+                    <input type="checkbox" id="id_key" name={{ switch_form.key.name }} >
                     <span class="slider"></span>
                 </label>
                 <p><input type="submit" value="submit"></p>

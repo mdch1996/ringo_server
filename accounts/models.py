@@ -15,8 +15,8 @@ class Device(models.Model):
 
 class Ring(models.Model):
     device = models.ForeignKey(Device, related_name='device_ring')
-    date_of_ring = models.DateTimeField()
     created = models.DateTimeField(auto_now_add=True)
+    date_of_ring = models.DateTimeField()
 
     class Meta:
         ordering = ('-created',)
@@ -24,9 +24,18 @@ class Ring(models.Model):
 
 class Switch(models.Model):
     device = models.ForeignKey(Device, related_name='device_switch')
-    key = models.BooleanField()
     created = models.DateTimeField(auto_now_add=True)
+    key = models.BooleanField()
     done = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-created',)
+
+
+class Sensor(models.Model):
+    device = models.ForeignKey(Device, related_name='device_temp')
+    created = models.DateTimeField(auto_now_add=True)
+    temp = models.FloatField()
 
     class Meta:
         ordering = ('-created',)
