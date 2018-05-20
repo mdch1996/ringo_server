@@ -14,8 +14,8 @@
             {% if request.user.is_authenticated %}
                 <ul class="menu">
                     <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
+                    <li {% if section == "sensor" %}class="selected"{% endif %}><a href="{% url "sensor" %}">Sensor</a></li>
                     <li {% if section == "images" %}class="selected"{% endif %}><a href="#">Images</a></li>
-                    <li {% if section == "sensor" %}class="selected"{% endif %}><a href="#">Sensor</a></li>
                 </ul>
             {% endif %}
             <span class="user">

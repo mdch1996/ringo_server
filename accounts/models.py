@@ -8,6 +8,7 @@ class Device(models.Model):
     ip = models.GenericIPAddressField(null=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    time_period = models.PositiveIntegerField(null=True, blank=True)
 
     def __str__(self):
         return 'Device raspberry_pi {}'.format(self.raspberry_pi_code)

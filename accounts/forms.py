@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Device, Switch
+from .models import Device, Switch, Sensor
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -35,3 +35,10 @@ class SwitchForm(forms.ModelForm):
     class Meta:
         model = Switch
         fields = ('key',)
+
+
+# class SensorSetForm(forms.ModelForm):
+#
+#     class Meta:
+#         model = Device
+#         fields = ('time_period',)
